@@ -17,7 +17,7 @@ fn open_file(filename: &str) -> File {
         println!("The save file is not found. Create new? [Y/n]");
     }
 
-    println!("Opening {display}...");=================================
+    println!("Opening {display}...");
 
     match File::open(&filepath) {
         Err(why) => panic!("It seems that we can't open the file {display}: {why}"),
