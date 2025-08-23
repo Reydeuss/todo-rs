@@ -20,7 +20,7 @@ impl Task {
         if self.status { "Done" } else { "Not Done Yet" }
     }
 
-    fn stringify(&self) -> String {
+    pub fn stringify(&self) -> String {
         let title_text: &str = self.title.as_str();
         let description_text: &str = self.description.as_str();
         let status_text: &str = if self.status { "true" } else { "false" };
