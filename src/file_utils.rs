@@ -15,6 +15,7 @@ fn open_file(filename: &str) -> File {
     if !file_exists {
         let mut c: char;
         println!("The save file is not found. Create new? [Y/n]");
+        // TODO: Implement the yes/no option
     }
 
     println!("Opening {display}...");
