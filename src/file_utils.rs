@@ -2,7 +2,7 @@ use std::fs::{File, exists, rename};
 use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
 
-use crate::Task::{Task, TaskList};
+use crate::task::{Task, TaskList};
 
 fn open_file(filename: &str) -> File {
     let filepath = Path::new(filename);

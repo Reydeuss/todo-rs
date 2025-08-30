@@ -1,7 +1,7 @@
-mod Task;
+mod task;
 mod file_utils;
 
-use crate::Task::TaskList;
+use crate::task::{Task, TaskList};
 use crate::file_utils::{read_file, save_list};
 use std::io::{self, BufRead, BufReader, Write};
 
@@ -37,7 +37,7 @@ fn main() {
                 println!("Enter a task description:");
                 io::stdin().read_line(&mut description).unwrap();
 
-                let new_task = Task::new(title, description);
+                let new_task = Task::new(&title, &description);
                 task_list.append(new_task);
 
                 println!("Task added successfully. Press enter to continue.");
