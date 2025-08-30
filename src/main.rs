@@ -8,7 +8,7 @@ use std::io::{self, BufRead, BufReader, Write};
 fn main() {
     const FILENAME: &str = "tasks.dat";
 
-    let task_list: TaskList = read_file(FILENAME);
+    let mut task_list: TaskList = read_file(FILENAME);
     let mut buffer: String = String::new();
     let mut option: i32 = 0;
 
