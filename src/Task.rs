@@ -16,7 +16,7 @@ impl Task {
         self.status = !self.status;
     }
 
-    fn status_text(&self) -> &str {
+    pub fn status_text(&self) -> &str {
         if self.status { "Done" } else { "Not Done Yet" }
     }
 
