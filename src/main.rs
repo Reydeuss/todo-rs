@@ -64,7 +64,7 @@ fn clear_screen() {
 fn print_tasks(task_list: &TaskList) {
     for task in task_list.iter() {
         println!("=====================");
-        println!("{}: {}", task.title, task.description);
+        println!("{}: {}", task.get_title(), task.get_description());
         println!("Status: {}", task.status_text());
         println!("=====================");
     }
