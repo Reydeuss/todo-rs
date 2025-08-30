@@ -37,8 +37,8 @@ fn main() {
                 println!("Enter a task description:");
                 io::stdin().read_line(&mut description).unwrap();
 
-                let new_task = Task::new(&title, &description);
-                task_list.append(new_task);
+                let new_task = Task::new(&title, &description, false);
+                task_list.push(new_task);
 
                 println!("Task added successfully. Press enter to continue.");
                 io::stdin().read_line(&mut buffer).unwrap();
