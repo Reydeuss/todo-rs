@@ -27,7 +27,22 @@ fn main() {
         };
 
         match option {
-            1 => {}
+            1 => {
+                let mut title = String::new();
+                let mut description = String::new();
+
+                print!("Enter a task title: ");
+                io::stdin().read_line(&mut title).unwrap();
+
+                println!("Enter a task description:");
+                io::stdin().read_line(&mut description).unwrap();
+
+                let new_task = Task::new(title, description);
+                task_list.append(new_task);
+
+                println!("Task added successfully. Press enter to continue.");
+                io::stdin().read_line(&mut buffer).unwrap();
+            }
 
             2 => {
                 save_list(&task_list, FILENAME);
