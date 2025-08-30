@@ -28,12 +28,12 @@ impl Task {
         return format!("{},{},{}", title_text, description_text, status_text);
     }
 
-    pub fn get_title(&self) -> String {
-        self.title
+    pub fn get_title(&self) -> &String {
+        &self.title
     }
 
-    pub fn get_description(&self) -> String {
-        self.description
+    pub fn get_description(&self) -> &String {
+        &self.description
     }
 
     pub fn get_status(&self) -> bool {
