@@ -46,6 +46,7 @@ fn main() {
 
             2 => {
                 save_list(&task_list, FILENAME);
+                println!("Saved items successfully to {}", FILENAME);
             }
 
             3 => {}
