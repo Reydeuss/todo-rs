@@ -19,7 +19,7 @@ fn open_file(filename: &str) -> io::Result<File> {
         let input = buffer.trim();
 
         match input {
-            "Y" | "" => return create_file(filename),
+            "Y" | "y" | "" => return create_file(filename),
             _ => {
                 println!("Invalid input. Aborting.");
                 process::exit(1);
