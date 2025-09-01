@@ -6,7 +6,7 @@ use crate::file_utils::{read_file, save_list};
 use std::io::{self, BufRead, BufReader, Write};
 
 fn main() {
-    const FILENAME: &str = "tasks.dat";
+    const FILENAME: &str = "tasks.txt";
 
     let mut task_list: TaskList = read_file(FILENAME).unwrap();
     let mut buffer: String = String::new();
