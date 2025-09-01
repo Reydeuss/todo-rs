@@ -1,29 +1,38 @@
 use std::fs::{File, exists, rename};
 use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
+use std::process;
 
 use crate::task::{Task, TaskList};
 
-fn open_file(filename: &str) -> File {
+fn open_file(filename: &str) -> io::Result<File> {
     let filepath = Path::new(filename);
     let display = filepath.display();
-    let file_exists = match exists(filepath) {
-        Ok(result) => result,
-        Err(e) => panic!("Unable to check if file exists or not.\nReason: {}", e),
-    };
 
-    if !file_exists {
-        let mut c: char;
+    if !filepath.exists() {
+        let mut buffer = String::new();
+
         println!("The save file is not found. Create new? [Y/n]");
-        // TODO: Implement the yes/no option
+
+        io::stdin().read_line(&mut buffer)?;
+
+        let input = buffer.trim();
+
+        match input {
+            "Y" | "" => return create_file(filename),
+            _ => {
+                println!("Invalid input. Aborting.");
+                process::exit(1);
+            }
+        }
     }
 
     println!("Opening {display}...");
+    File::open(filepath)
+}
 
-    match File::open(&filepath) {
-        Err(why) => panic!("It seems that we can't open the file {display}: {why}"),
-        Ok(file) => file,
-    }
+fn create_file(filename: &str) -> io::Result<File> {
+    File::create(filename)
 }
 
 /*
@@ -51,23 +60,17 @@ fn parse_task(text: String) -> Task {
     Task::new(title, description, status)
 }
 
-pub fn read_file(filename: &str) -> TaskList {
-    // let filepath = Path::new(filename);
-    let file = open_file(filename);
+pub fn read_file(filename: &str) -> io::Result<TaskList> {
+    let file = open_file(filename)?;
     let reader = BufReader::new(file);
     let mut task_list: TaskList = Vec::new();
 
     for line in reader.lines() {
-        let text = match line {
-            Ok(t) => t,
-            Err(error) => panic!("seems there is a problem in reading the file: {error}"),
-        };
-
-        let task = parse_task(text);
+        let task = parse_task(line?);
         task_list.push(task);
     }
 
-    task_list
+    Ok(task_list)
 }
 
 pub fn save_list(task_list: &TaskList, filename: &str) {
